@@ -18,12 +18,18 @@ onAuthStateChanged(auth, (user) => {
   // Optionally show/hide login/logout buttons here if needed
 });
 
-// Logout button (if you have one)
-const logoutBtn = document.getElementById("logoutBtn");
-if (logoutBtn) {
-  logoutBtn.addEventListener("click", () => {
-    signOut(auth).then(() => {
-      window.location.href = "index.html";
+// Logout button logic
+document.addEventListener("DOMContentLoaded", () => {
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      signOut(auth)
+        .then(() => {
+          window.location.href = "index.html";
+        })
+        .catch((error) => {
+          console.error("Logout failed:", error);
+        });
     });
-  });
-}
+  }
+});
