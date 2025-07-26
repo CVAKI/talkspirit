@@ -1,11 +1,11 @@
-
-import { auth, db, onAuthStateChanged, doc, getDoc, updateDoc } from "./firebase-config.js";
+// js/coin.js
+import { auth, db, doc, getDoc, updateDoc } from "./firebase-config.js";
 
 const coinDisplay = document.getElementById("coinCount");
 const startBtn = document.getElementById("startChatBtn");
 
-onAuthStateChanged(auth, async user => {
-  if (!user) window.location.href = "index.html";
+auth.onAuthStateChanged(async (user) => {
+  if (!user) return; // already redirected from auth.js if not logged in
 
   const userRef = doc(db, "users", user.uid);
   const userDoc = await getDoc(userRef);
@@ -22,16 +22,11 @@ onAuthStateChanged(auth, async user => {
       alert("Not enough Spirit Coins!");
     }
   };
-  //--------------------------------------------------------------------------------------------------------------2
-import { auth } from "./firebase-config.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+});
 
-onAuthStateChanged(auth, (user) => {
-  const userInfoEl = document.getElementById("userInfo");
-  if (user) {
-    const nameOrEmail = user.displayName || user.email;
-    userInfoEl.textContent = `Logged in as: ${nameOrEmail}`;
-  } else {
-    userInfoEl.textContent = "Not logged in";
-  }
+// Logout logic
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  auth.signOut().then(() => {
+    window.location.href = "index.html";
+  });
 });
