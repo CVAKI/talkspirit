@@ -17,7 +17,7 @@ onAuthStateChanged(auth, (user) => {
 
   // Optionally show/hide login/logout buttons here if needed
 });
-//---------------------------------------------------------------test
+
 document.addEventListener("DOMContentLoaded", () => {
   const logoutBtn = document.getElementById("logoutBtn");
   if (logoutBtn) {
