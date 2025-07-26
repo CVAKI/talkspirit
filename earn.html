@@ -1,0 +1,35 @@
+<!-- public/earn.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Earn Spirit Coins</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="center">
+    <h1>Watch Ad to Earn Coins</h1>
+    <button id="watchAd">🎥 Simulate Ad</button>
+    <p id="status"></p>
+  </div>
+  <script type="module">
+    import { auth, db, onAuthStateChanged, doc, getDoc, updateDoc } from "../js/firebase-config.js";
+    const btn = document.getElementById("watchAd");
+    const status = document.getElementById("status");
+
+    onAuthStateChanged(auth, async user => {
+      if (!user) window.location.href = "index.html";
+
+      const userRef = doc(db, "users", user.uid);
+      btn.onclick = async () => {
+        status.innerText = "Watching ad...";
+        setTimeout(async () => {
+          const snap = await getDoc(userRef);
+          let coins = snap.data().coins + 200;
+          await updateDoc(userRef, { coins });
+          status.innerText = "You earned 200 Spirit Coins!";
+        }, 3000);
+      };
+    });
+  </script>
+</body>
+</html>
