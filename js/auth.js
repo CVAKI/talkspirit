@@ -1,24 +1,29 @@
 // js/auth.js
-import { auth, db, GoogleAuthProvider, signInWithPopup, doc, getDoc, setDoc } from "./firebase-config.js";
 
-const provider = new GoogleAuthProvider();
-const loginBtn = document.getElementById('loginBtn');
+import { auth } from "./firebase-config.js";
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-if (loginBtn) {
-  loginBtn.onclick = async () => {
-    const result = await signInWithPopup(auth, provider);
-    const user = result.user;
+// Page Protection Logic
+onAuthStateChanged(auth, (user) => {
+  const currentPage = location.pathname;
 
-    // Check if user is new
-    const userRef = doc(db, "users", user.uid);
-    const docSnap = await getDoc(userRef);
-    if (!docSnap.exists()) {
-      await setDoc(userRef, {
-        coins: 1000,
-        name: user.displayName,
-        email: user.email
-      });
-    }
-    window.location.href = "dashboard.html";
-  };
+  const isLoginPage = currentPage.includes("index.html") || currentPage === "/";
+  const isProtectedPage = !isLoginPage;
+
+  if (!user && isProtectedPage) {
+    // Not logged in and trying to access protected page
+    window.location.href = "index.html";
+  }
+
+  // Optionally show/hide login/logout buttons here if needed
+});
+
+// Logout button (if you have one)
+const logoutBtn = document.getElementById("logoutBtn");
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", () => {
+    signOut(auth).then(() => {
+      window.location.href = "index.html";
+    });
+  });
 }
