@@ -17,6 +17,28 @@ onAuthStateChanged(auth, (user) => {
 
   // Optionally show/hide login/logout buttons here if needed
 });
+//---------------------------------------------------------------test
+document.addEventListener("DOMContentLoaded", () => {
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (logoutBtn) {
+    console.log("Logout button found"); // ✅ Debug line
+
+    logoutBtn.addEventListener("click", () => {
+      console.log("Logout button clicked"); // ✅ Debug line
+      signOut(auth)
+        .then(() => {
+          console.log("User signed out"); // ✅ Debug line
+          window.location.href = "index.html";
+        })
+        .catch((error) => {
+          console.error("Logout failed:", error);
+        });
+    });
+  } else {
+    console.warn("Logout button not found!");
+  }
+});
+
 
 // Logout button logic
 document.addEventListener("DOMContentLoaded", () => {
