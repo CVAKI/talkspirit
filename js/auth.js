@@ -18,29 +18,6 @@ onAuthStateChanged(auth, (user) => {
   // Optionally show/hide login/logout buttons here if needed
 });
 
-// coinnn
-import { auth } from "./firebase-config.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-document.addEventListener("DOMContentLoaded", () => {
-  onAuthStateChanged(auth, (user) => {
-    const userInfoEl = document.getElementById("userInfo");
-
-    if (user) {
-      const nameOrEmail = user.displayName || user.email;
-      if (userInfoEl) {
-        userInfoEl.textContent = `${nameOrEmail}`;
-      }
-    } else {
-      if (userInfoEl) {
-        userInfoEl.textContent = "Not logged in";
-      }
-      window.location.href = "index.html";
-    }
-  });
-});
-
-
 document.addEventListener("DOMContentLoaded", () => {
   const logoutBtn = document.getElementById("logoutBtn");
   if (logoutBtn) {
