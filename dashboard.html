@@ -7,26 +7,27 @@
 </head>
 <body>
   <div class="center">
-<h3 id="userInfo">Loading user...</h3>
-<img id="userPhoto" src="" alt="User Photo" style="display:none; width:60px; height:60px; border-radius:50%; margin-top:10px;">
+  <h3 id="userInfo">Loading user...</h3> <!-- ✅ KEEP THIS ONE -->
+  <img id="userPhoto" src="" alt="User Photo" style="display:none; width:60px; height:60px; border-radius:50%; margin-top:10px;">
 
-    <h1>Welcome 👋</h1>
-<h3 id="userInfo">Loading user...</h3>
+  <h1>Welcome 👋</h1>
 
-    <h2>Your Coins: <span id="coinCount">...</span></h2>
-    <button onclick="window.location.href='earn.html'">Watch Ad (+200)</button>
-    <button id="startChatBtn">Start Chat (1000 coins)</button>
-    <button id="logoutBtn" 
-      style="position:fixed; 
-      top:10px; 
-      right:10px;
-      padding:10px 15px; 
-      background:#ff4444; 
-      color:white; 
-      border:none; 
-      border-radius:5px; 
-      cursor:pointer;"> Logout </button>
-  </div>
+  <h2>Your Coins: <span id="coinCount">...</span></h2>
+  <button onclick="window.location.href='earn.html'">Watch Ad (+200)</button>
+  <button id="startChatBtn">Start Chat (1000 coins)</button>
+
+  <button id="logoutBtn"
+    style="position:fixed; 
+    top:10px; 
+    right:10px;
+    padding:10px 15px; 
+    background:#ff4444; 
+    color:white; 
+    border:none; 
+    border-radius:5px; 
+    cursor:pointer;"> Logout </button>
+</div>
+
 
   <!-- Scripts -->
   <script type="module" src="js/auth.js"></script>  
