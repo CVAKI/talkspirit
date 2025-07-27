@@ -12,7 +12,7 @@ onAuthStateChanged(auth, async (user) => {
 
   // Show user email or display name
   const nameOrEmail = user.displayName || user.email;
-  userInfoEl.textContent = `Logged in as: ${nameOrEmail}`;
+  userInfoEl.textContent = `${nameOrEmail}`;
 
   // Load and display coin count
   const userRef = doc(db, "users", user.uid);
