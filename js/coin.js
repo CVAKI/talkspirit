@@ -3,6 +3,7 @@ import { auth, db, onAuthStateChanged, doc, getDoc, updateDoc } from "./firebase
 const coinDisplay = document.getElementById("coinCount");
 const startBtn = document.getElementById("startChatBtn");
 const userInfoEl = document.getElementById("userInfo");
+const userPhotoEl = document.getElementById("userPhoto");
 
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
@@ -10,17 +11,23 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
-  // Show user email or display name
+  // Show user name/email
   const nameOrEmail = user.displayName || user.email;
-  userInfoEl.textContent = `${nameOrEmail}`;
+  userInfoEl.textContent = `Logged in as: ${nameOrEmail}`;
 
-  // Load and display coin count
+  // Show user photo if available
+  if (user.photoURL) {
+    userPhotoEl.src = user.photoURL;
+    userPhotoEl.style.display = "inline-block";
+  }
+
+  // Load and display coins
   const userRef = doc(db, "users", user.uid);
   const userDoc = await getDoc(userRef);
   let coins = userDoc.data().coins || 0;
   coinDisplay.textContent = coins;
 
-  // Handle "Start Chat" button
+  // Start Chat button logic
   startBtn.onclick = async () => {
     if (coins >= 1000) {
       coins -= 1000;
