@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (user) {
       const nameOrEmail = user.displayName || user.email;
       if (userInfoEl) {
-        userInfoEl.textContent = `Logged in as: ${nameOrEmail}`;
+        userInfoEl.textContent = `${nameOrEmail}`;
       }
     } else {
       if (userInfoEl) {
@@ -59,22 +59,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   } else {
     console.warn("Logout button not found!");
-  }
-});
-
-
-// Logout button logic
-document.addEventListener("DOMContentLoaded", () => {
-  const logoutBtn = document.getElementById("logoutBtn");
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", () => {
-      signOut(auth)
-        .then(() => {
-          window.location.href = "index.html";
-        })
-        .catch((error) => {
-          console.error("Logout failed:", error);
-        });
-    });
   }
 });
