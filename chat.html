@@ -44,7 +44,7 @@
 
   <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
   <script type="module">
-    const socket = io("http://localhost:5000");
+    const socket = io("https://talkspirit.onrender.com");
     const chatBox = document.getElementById("chatBox");
     const msgInput = document.getElementById("msgInput");
     const sendBtn = document.getElementById("sendBtn");
@@ -73,12 +73,14 @@
       appendMessage(text);
     });
 
-   socket.on("partner-left", () => {
+  socket.on("partner-left", () => {
   const systemMessage = document.createElement("div");
   systemMessage.classList.add("message", "system");
   systemMessage.textContent = "🔕 Your chat partner has left.";
-  chat.appendChild(systemMessage);
+  chatBox.appendChild(systemMessage);
+  chatBox.scrollTop = chatBox.scrollHeight;
 });
+
 
 
     sendBtn.onclick = () => {
